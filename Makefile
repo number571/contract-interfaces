@@ -9,4 +9,4 @@ build: contract.sol deploy.go gclient.go
 	go build -o gclient gclient.go values.go
 clean: 
 	rm -rf build/ contracts/
-	rm deploy gclient client
+	rm deploy gclient client contract.address
