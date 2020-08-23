@@ -93,7 +93,7 @@ func main() {
 				switch splited[2] {
 				case "present":
 					// chain cancel present id_present
-					chainCancelPresent(splited[2], splited[2:])
+					chainCancelPresent(splited[2:])
 				default:
 					fmt.Println("command undefined\n")
 				}
@@ -180,7 +180,7 @@ func chainCreatePresent(splited []string) {
 	fmt.Println("Tx:", tx.Hash().Hex(), "\n")
 }
 
-func chainCancelPresent(category string, splited []string) {
+func chainCancelPresent(splited []string) {
 	if len(splited) != 2 {
 		fmt.Println("failed: len(splited) != 2\n")
 		return
@@ -196,23 +196,10 @@ func chainCancelPresent(category string, splited []string) {
 		fmt.Println("failed: conv(str1) to num\n")
 		return
 	}
-	switch category {
-	case "present":
-		tx, err = Instance.CancelPresent(
-			resetAuth(User), 
-			num,
-		)
-	case "sale":
-		tx, err = Instance.CancelSale(
-			resetAuth(User), 
-			num,
-		)
-	case "rent":
-		tx, err = Instance.CancelRent(
-			resetAuth(User), 
-			num,
-		)
-	}
+	tx, err = Instance.CancelPresent(
+		resetAuth(User), 
+		num,
+	)
 	if err != nil {
 		fmt.Println(err, "\n")
 		return
